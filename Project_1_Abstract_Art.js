@@ -1,6 +1,7 @@
 //this is a project I made that basically takes a sound file and plays it while also having the background and lines indicate the volume of the music
 //I used it to visualize a part of Tchaikovsky's 6th Sympohony 4th movement that I think illustrates building up and falling back into silence better than any other musical moment ever
 //of course it could be used for anything if you change the file path in the preload function
+//Also keep in mind that p5 needs that file path in the index.html file in order to work so be sure to fix that
 
 
 //import soundtrack (mp3 file I created of a youtube recording of the best moment of Tchaikovsky's 6th symphony movement 4)
@@ -25,7 +26,8 @@ let intensity_list = new Array();
 //basically frameCount but I already used that so I'm using it again
 let num_iterations;
 //size of canvas, pretty self explanitory
-let canvas_size;
+let canvas_x;
+let canvas_y;
 //controls the frame rates of both the line and the backround (vis for visual, line for line) works by taking the averages over a few iterations of draw
 //larger smoothness = lesser frame rate which can be good becasue the background is super flashy when Vis_smoothness = 1
 let Vis_smoothness;
@@ -34,8 +36,10 @@ let line_smoothness;
 let average_intensity;
 function setup() {
     //variable that can be altered to change the size of the canvas
-    canvas_size = 700
-    createCanvas(canvas_size,canvas_size)
+    //I have it as these because it just barley filles up the chrome window I'm using
+    canvas_x = 1450
+    canvas_y = 766
+    createCanvas(canvas_x,canvas_y)
     height = 0
     point_x = 0
     point_y = 0
@@ -72,21 +76,21 @@ function draw() {
         //you could do other background colors for different pieces, I did red because it plus black suits this piece exceptionally well
         background(average_intensity, 0, 0)
     }
-    //this sets the y values of each line to be proportional to the music amplitude and the canvas size
-    height = amplitude.getLevel()*canvas_size
+    //this sets the y values of each line to be proportional to the music amplitude and the canvas y value and then makes a list of those y values
+    height = amplitude.getLevel()*canvas_y
+    point_y = canvas_y-height
+    height_list.push(point_y)
     stroke(255)
     //point_x is used to reset the frameCount and height_list variables when the lines go off the side of the canvas
     //that means they resume from the left side of the cavas
     point_x = frameCount
-    point_y = canvas_size-height
-    height_list.push(point_y)
-    if (point_x > canvas_size) {
+    if (point_x > canvas_x) {
         frameCount = 0
         height_list = new Array()
     }
     //this draws the white lines based on the line_smoothness, canvas_size, and heights in the height_list (aka how loud the music is at different points)
     if (frameCount > line_smoothness-1) {
-            for (i = 0; i < (canvas_size-1);) {
+            for (i = 0; i < (canvas_x-1);) {
                 line(i,height_list[i],i+line_smoothness,height_list[i+line_smoothness]);
                 i += line_smoothness
             }
