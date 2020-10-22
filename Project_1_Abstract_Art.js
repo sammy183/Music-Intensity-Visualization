@@ -37,8 +37,8 @@ let average_intensity;
 function setup() {
     //variable that can be altered to change the size of the canvas
     //I have it as these because it just barley filles up the chrome window I'm using
-    canvas_x = 1450
-    canvas_y = 766
+    canvas_x = 750
+    canvas_y = 750
     createCanvas(canvas_x,canvas_y)
     height = 0
     point_x = 0
