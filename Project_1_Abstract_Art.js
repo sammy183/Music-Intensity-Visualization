@@ -40,7 +40,7 @@ function setup() {
     //needed a random thing so that'll be the color (ps. red is definitely the best one for this piece)
     random_RedYellow = Math.floor(random(0,2))
     //variable that can be altered to change the size of the canvas
-    //I have it as these because it just barley filles up the chrome window I'm using
+    //I have it as these because it just barely filles up the chrome window I'm using
     canvas_x = 750
     canvas_y = 750
     createCanvas(canvas_x,canvas_y)
