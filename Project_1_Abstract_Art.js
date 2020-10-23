@@ -34,7 +34,11 @@ let Vis_smoothness;
 let line_smoothness;
 //what gets used to determine the average background color and helps weed out the sudden flashes 
 let average_intensity;
+//needed to do this for random stuff
+let random_RedYellow;
 function setup() {
+    //needed a random thing so that'll be the color (ps. red is definitely the best one for this piece)
+    random_RedYellow = Math.floor(random(0,2))
     //variable that can be altered to change the size of the canvas
     //I have it as these because it just barley filles up the chrome window I'm using
     canvas_x = 750
@@ -72,9 +76,18 @@ function draw() {
             average_intensity += (intensity_list[num_iterations-j])
         }
         average_intensity = average_intensity/Vis_smoothness
+        console.log(average_intensity, random_RedYellow)
         //this sets the background color based on the average volume level of the music over some time
-        //you could do other background colors for different pieces, I did red because it plus black suits this piece exceptionally well
-        background(average_intensity, 0, 0)
+        //you could do other background colors for different pieces, I did red because it plus black suits this piece exceptionally well (now I'm making it random)
+        if (average_intensity > 205) {
+            if (random_RedYellow == 0) {
+                background(average_intensity,0,0)
+            } else if (random_RedYellow == 1) {
+                background(average_intensity, average_intensity, 0)
+            }
+        } else {
+            background(average_intensity,0,0)
+        }
     }
     //this sets the y values of each line to be proportional to the music amplitude and the canvas y value and then makes a list of those y values
     height = amplitude.getLevel()*canvas_y
@@ -103,51 +116,4 @@ function draw() {
 //As you could probably tell I went a little overboard. Just a tad. 
 //If you didn't know we were just supposed to make ellipses and stuff. 
 //Like the most complex thing was gonna be using MouseX and MouseY
-//Oops??? Whatever. 
-
-//for (along_x=0;along_x != 400;) {
-//    line(0,0,along_x,y)
-//    line(400,0,along_x,y)
-//    line(0,400,along_x,y)
-//    line(400,400,along_x,y)
-//    along_x += 100
-//}   
-//for (along_y=0;along_y != 400;) {
-//    line(0,0,x,along_y)
-//    line(400,0,x,along_y)
-//    line(0,400,x,along_y)
-//    line(400,400,x,along_y)
-//    along_y += 100
-//}
-//let mySound;
-//function preload () {
-//    soundFormats('mp3')
-//    mySound = loadSound('Projects/Tchaikovsky_Symphony_6_Pathétique_best_moment.mp3')
-//}
-
-//strokeWeight(1)
-//    if (mouseX%10 == 0 && mouseY%10 == 0) {
-//        if (mouseIsPressed) {
-//            line(0,0,mouseX,mouseY)
-//            line(400,0,mouseX,mouseY)
-//            line(0,400,mouseX,mouseY)
-//            line(400,400,mouseX,mouseY)
-//        }
-//    }
-//
-//    fill(255,0,0)
-//    stroke(255,0,0)
-//    strokeWeight(0.1)
-//    for (;x != 400;) {
-//        line(x,0,x,400)
-//        line(0,y,400,y)
-//        for (along_x=0;along_x != 400;) {
-//            line(0,0,along_x,y)
-//            line(400,0,along_x,y)
-//            line(0,400,along_x,y)
-//            line(400,400,along_x,y)
-//           along_x += 10
-//        }
-//        x += 10
-//        y += 10
-//    }
+//Oops???
