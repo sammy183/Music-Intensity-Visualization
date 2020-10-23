@@ -8,7 +8,7 @@
 let piece;
 function preload () {
     //CHANGE THIS FILE PATH IN ORDER TO ADD NEW PIECES!!!!!
-    piece = loadSound("Projects/Tchaikovsky_Symphony_6_Pathétique_best_moment.mp3")
+    piece = loadSound("Tchaikovsky_Symphony_6_Pathétique_best_moment.mp3")
 }
 //initialize control variables 
 //loudness of the music
@@ -78,8 +78,9 @@ function draw() {
         average_intensity = average_intensity/Vis_smoothness
         console.log(average_intensity, random_RedYellow)
         //this sets the background color based on the average volume level of the music over some time
-        //you could do other background colors for different pieces, I did red because it plus black suits this piece exceptionally well (now I'm making it random)
-        if (average_intensity > 205) {
+        //you could do other background colors for different pieces, I did red because it plus black suits this piece exceptionally well 
+        //(now I'm making it random so it can be yellow when loud)
+        if (average_intensity > 200) {
             if (random_RedYellow == 0) {
                 background(average_intensity,0,0)
             } else if (random_RedYellow == 1) {
