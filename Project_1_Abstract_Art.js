@@ -105,7 +105,7 @@ function draw() {
     //this draws the white lines based on the line_smoothness, canvas_size, and heights in the height_list (aka how loud the music is at different points)
     if (frameCount > line_smoothness-1) {
             for (i = 0; i < (canvas_x-1);) {
-                line(i,height_list[i],i+line_smoothness,height_list[i+line_smoothness]);
+                line(i,height_list[i],i+line_smoothness,height_list[i+line_smoothness])
                 i += line_smoothness
             }
         }
